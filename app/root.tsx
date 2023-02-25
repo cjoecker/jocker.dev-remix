@@ -1,4 +1,4 @@
-import type { LoaderArgs } from "@remix-run/node";
+import type {LinksFunction, LoaderArgs} from "@remix-run/node";
 import {
   Links,
   LiveReload,
@@ -12,6 +12,11 @@ import { useTranslation } from "react-i18next";
 import i18next from "~/i18next.server";
 import { json } from "@remix-run/node";
 import { useChangeLanguage } from "~/hooks/useChangeLanguage";
+import stylesheet from "~/tailwind.css";
+
+export const links: LinksFunction = () => [
+  { rel: "stylesheet", href: stylesheet },
+];
 
 export async function loader({ request }: LoaderArgs) {
   let locale = await i18next.getLocale(request);
