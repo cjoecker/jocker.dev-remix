@@ -1,48 +1,50 @@
-import type {LinksFunction, LoaderArgs} from "@remix-run/node";
+import type { LinksFunction, LoaderArgs } from '@remix-run/node';
+import { json } from '@remix-run/node';
 import {
-  Links,
-  LiveReload,
-  Meta,
-  Outlet,
-  Scripts,
-  ScrollRestoration,
-  useLoaderData,
-} from "@remix-run/react";
-import { useTranslation } from "react-i18next";
-import i18next from "~/i18next.server";
-import { json } from "@remix-run/node";
-import { useChangeLanguage } from "~/hooks/useChangeLanguage";
-import stylesheet from "~/tailwind.css";
+	Links,
+	LiveReload,
+	Meta,
+	Outlet,
+	Scripts,
+	ScrollRestoration,
+	useLoaderData,
+} from '@remix-run/react';
+import { useTranslation } from 'react-i18next';
+
+import { useChangeLanguage } from '~/hooks/useChangeLanguage';
+import i18next from '~/i18next.server';
+import stylesheet from '~/tailwind.css';
 
 export const links: LinksFunction = () => [
-  { rel: "stylesheet", href: stylesheet },
+	{ rel: 'stylesheet', href: stylesheet },
 ];
 
 export async function loader({ request }: LoaderArgs) {
-  let locale = await i18next.getLocale(request);
-  return json({ locale });
+	const locale = await i18next.getLocale(request);
+	return json({ locale });
 }
 
-export let handle = {
-  i18n: "common",
+export const handle = {
+	i18n: 'common',
 };
 
+// eslint-disable-next-line import/no-default-export
 export default function Root() {
-  let { locale } = useLoaderData<typeof loader>();
-  let { i18n } = useTranslation();
-  useChangeLanguage(locale);
-  return (
-    <html lang={locale} dir={i18n.dir()}>
-      <head>
-        <Meta />
-        <Links />
-      </head>
-      <body>
-        <Outlet />
-        <ScrollRestoration />
-        <Scripts />
-        <LiveReload />
-      </body>
-    </html>
-  );
+	const { locale } = useLoaderData<typeof loader>();
+	const { i18n } = useTranslation();
+	useChangeLanguage(locale);
+	return (
+		<html lang={locale} dir={i18n.dir()}>
+			<head>
+				<Meta />
+				<Links />
+			</head>
+			<body>
+				<Outlet />
+				<ScrollRestoration />
+				<Scripts />
+				<LiveReload />
+			</body>
+		</html>
+	);
 }
