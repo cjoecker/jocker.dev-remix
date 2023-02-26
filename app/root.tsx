@@ -13,10 +13,12 @@ import { useTranslation } from 'react-i18next';
 
 import { useChangeLanguage } from '~/hooks/useChangeLanguage';
 import i18next from '~/i18next.server';
-import stylesheet from '~/tailwind.css';
+import TailwindStyles from '~/tailwind.css';
+import MainStyles from '~/index.css';
 
 export const links: LinksFunction = () => [
-	{ rel: 'stylesheet', href: stylesheet },
+	{ rel: 'stylesheet', href: TailwindStyles },
+	{ rel: 'stylesheet', href: MainStyles }
 ];
 
 export async function loader({ request }: LoaderArgs) {
