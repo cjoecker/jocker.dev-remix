@@ -71,6 +71,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #ffffff;
+  line-height: normal;
 }
 
 h1,

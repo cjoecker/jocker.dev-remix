@@ -13,7 +13,7 @@ import { Testimonials } from '~/components/sections/testimonials';
 
 export default function Index() {
 	return (
-		<div className="text-base font-normal">
+		<main className="text-base font-normal">
 			<Header />
 			<div className="w-full flex flex-col">
 				<div className="">
@@ -30,6 +30,6 @@ export default function Index() {
 					<Contact />
 				</div>
 			</div>
-		</div>
+		</main>
 	);
 }
